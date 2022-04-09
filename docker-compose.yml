@@ -1,0 +1,35 @@
+version: '3'
+
+services:
+  mysql-neurl:
+    image: mysql:8.0.25
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=neurl-db
+      - MYSQL_USER=neurl
+      - MYSQL_PASSWORD=neurl
+    ports:
+      - 3306:3306
+    security_opt:
+      - seccomp:unconfined
+
+  neurl-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: neurl-api:0.0.1-SNAPSHOT
+    restart: on-failure
+    depends_on:
+      - mysql-neurl
+    expose:
+      - 8080
+
+
+  nginx:
+    image: nginx:1.21.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - neurl-api
+    ports:
+      - "8080:4000"

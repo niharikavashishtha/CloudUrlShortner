@@ -1,0 +1,26 @@
+server:
+  port: 8080
+neurl:
+  api:
+    longUrlMaxSize: 2097152
+
+management:
+  endpoints:
+    web:
+      base-path: /
+      path-mapping.health: /ping
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password:
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: update
+  h2:
+    console:
+      enabled: true
+      settings:
+        web-allow-others: true
