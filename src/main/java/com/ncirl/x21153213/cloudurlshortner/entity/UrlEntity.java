@@ -27,4 +27,8 @@ public class UrlEntity {
 
     @Column(nullable = false)
     private Date createdDate;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "clientId", referencedColumnName = "clientId", insertable = false, updatable = false)
+    private ClientEntity clientEntity;
+    private long clientId;
 }
