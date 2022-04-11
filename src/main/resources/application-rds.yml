@@ -1,0 +1,12 @@
+spring:
+  flyway:
+    enabled: false
+  datasource:
+    url: jdbc:mysql://loyaltyreward.chwlezgyi7rm.eu-west-1.rds.amazonaws.com:3306/LoyaltyReward
+    username: loyaltydb
+    password: loyaltydb
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
