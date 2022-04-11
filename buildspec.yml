@@ -19,4 +19,4 @@ artifacts:
   files:
     - cloud-url-shortner-0.0.1-SNAPSHOT.jar
     - appspec.yml
-    - scripts/*
+    - url-shortner-scripts/*

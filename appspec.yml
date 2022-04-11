@@ -13,14 +13,14 @@ permissions:
 
 hooks:
   ApplicationStop:
-    - location: scripts/stop.sh
+    - location: url-shortner-scripts/stop.sh
       timeout: 60
       runas: ec2-user
   ApplicationStart:
-    - location: scripts/start.sh
+    - location: url-shortner-scripts/start.sh
       timeout: 60
       runas: ec2-user
   BeforeInstall:
-    - location: scripts/dependency.sh
+    - location: url-shortner-scripts/dependency.sh
       timeout: 60
       runas: ec2-user
