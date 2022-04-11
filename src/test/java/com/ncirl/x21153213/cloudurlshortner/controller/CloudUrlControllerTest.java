@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
@@ -20,6 +21,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class CloudUrlControllerTest {
     @LocalServerPort
     private int port;
+
+    @Value("${hostname:127.0.0.1}")
+    private String hostname;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -58,7 +62,7 @@ public class CloudUrlControllerTest {
         longURLDto.setClientId(1);
         ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://127.0.0.1:" + port + "/cloudurl/short-me", longURLDto, String.class);
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(returnValue.getBody()).isEqualTo("http://127.0.0.1:8080/cloudurl/cvuMJB");
+        assertThat(returnValue.getBody()).isEqualTo("http://" + hostname + ":8080/cloudurl/cvuMJB");
     }
 
 
