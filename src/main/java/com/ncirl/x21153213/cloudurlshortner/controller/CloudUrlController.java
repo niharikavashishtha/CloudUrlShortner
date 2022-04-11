@@ -30,6 +30,9 @@ public class CloudUrlController {
     @Value("${server.port:8080}")
     private int port;
 
+    @Value("${hostname:127.0.0.1}")
+    private String hostname;
+
     @PostMapping(path = "/short-me" )
     @ResponseBody
     public ResponseEntity<String> shortMe(@RequestBody LongUrlDTO longURLDto) {
@@ -43,7 +46,7 @@ public class CloudUrlController {
         }
 
         log.info("Received URL shortening request for {}", longURLDto.getLongUrl());
-        return ResponseEntity.status(HttpStatus.OK).body("http://" + getHostname() + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
+        return ResponseEntity.status(HttpStatus.OK).body("http://" + hostname + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
     }
 
    // @Cacheable(value = "urls", key = "#shortUrl", sync = true)
@@ -57,16 +60,5 @@ public class CloudUrlController {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(urlService.getLongUrl(shortUrl)))
                 .build();
-    }
-
-
-    /**
-     * Get hostname.
-     *
-     * @return
-     */
-    private String getHostname() {
-        String hostname = InetAddress.getLoopbackAddress().getHostAddress();
-        return hostname;
     }
 }
