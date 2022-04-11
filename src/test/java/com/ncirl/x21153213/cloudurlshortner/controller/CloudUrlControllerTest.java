@@ -1,6 +1,7 @@
 package com.ncirl.x21153213.cloudurlshortner.controller;
 
 import com.ncirl.x21153213.cloudurlshortner.dto.LongUrlDTO;
+import com.ncirl.x21153213.cloudurlshortner.entity.ClientEntity;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
@@ -25,12 +26,36 @@ public class CloudUrlControllerTest {
 
 
     @Test
+    @Order(0)
+    public void test_post_client() throws Exception {
+
+        ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setClientName("X21153213");
+
+        ResponseEntity<ClientEntity> returnValue = this.restTemplate.postForEntity("http://localhost:" +
+                port + "/cloudurl/registerclient", clientEntity, ClientEntity.class);
+        assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
+        assertThat(returnValue.getBody().getApiKey()).isNotEmpty();
+        assertThat(returnValue.getBody().getClientName()).isEqualTo("X21153213");
+    }
+
+    @Test
     @Order(1)
     public void test_post_short_me_url() throws Exception {
 
-        LongUrlDTO longURLDto = new LongUrlDTO();
-        longURLDto.setLongUrl("http://www.neueda.com/something/exciting/going/to/happen/with/this/long/url");
+        ClientEntity clientEntity = new ClientEntity();
+        clientEntity.setClientName("X21153213");
 
+        ResponseEntity<ClientEntity> returnClientEntity = this.restTemplate.postForEntity("http://localhost:" +
+                port + "/cloudurl/registerclient", clientEntity, ClientEntity.class);
+        assertThat(returnClientEntity.getStatusCode()).isEqualTo(HttpStatus.OK);
+
+        LongUrlDTO longURLDto = new LongUrlDTO();
+        longURLDto.setClientId(returnClientEntity.getBody().getClientId());
+        longURLDto.setApiKey(returnClientEntity.getBody().getApiKey());
+
+        longURLDto.setLongUrl("http://www.neueda.com/something/exciting/going/to/happen/with/this/long/url");
+        longURLDto.setClientId(1);
         ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://localhost:" + port + "/cloudurl/short-me", longURLDto, String.class);
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(returnValue.getBody()).isEqualTo("http://localhost:8080/cloudurl/cvuMJB");
