@@ -56,9 +56,9 @@ public class CloudUrlControllerTest {
 
         longURLDto.setLongUrl("http://www.neueda.com/something/exciting/going/to/happen/with/this/long/url");
         longURLDto.setClientId(1);
-        ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://localhost:" + port + "/cloudurl/short-me", longURLDto, String.class);
+        ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://127.0.0.1:" + port + "/cloudurl/short-me", longURLDto, String.class);
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(returnValue.getBody()).isEqualTo("http://localhost:8080/cloudurl/cvuMJB");
+        assertThat(returnValue.getBody()).isEqualTo("http://127.0.0.1:8080/cloudurl/cvuMJB");
     }
 
 

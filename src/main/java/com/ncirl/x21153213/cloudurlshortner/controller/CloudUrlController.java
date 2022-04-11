@@ -66,12 +66,7 @@ public class CloudUrlController {
      * @return
      */
     private String getHostname() {
-        String hostname = "localhost";
-        try {
-            InetAddress.getLocalHost().getHostAddress();
-        } catch (UnknownHostException e) {
-            // return localhost
-        }
+        String hostname = InetAddress.getLoopbackAddress().getHostAddress();
         return hostname;
     }
 }
