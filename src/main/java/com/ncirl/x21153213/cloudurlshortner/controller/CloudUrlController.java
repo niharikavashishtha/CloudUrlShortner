@@ -30,8 +30,8 @@ public class CloudUrlController {
     @Value("${server.port:8080}")
     private int port;
 
-    @Value("${hostname:127.0.0.1}")
-    private String hostname;
+    @Value("${public-ipv4:127.0.0.1}")
+    private String publicIp;
 
     @PostMapping(path = "/short-me" )
     @ResponseBody
@@ -46,7 +46,7 @@ public class CloudUrlController {
         }
 
         log.info("Received URL shortening request for {}", longURLDto.getLongUrl());
-        return ResponseEntity.status(HttpStatus.OK).body("http://" + hostname + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
+        return ResponseEntity.status(HttpStatus.OK).body("http://" + publicIp + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
     }
 
    // @Cacheable(value = "urls", key = "#shortUrl", sync = true)

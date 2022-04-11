@@ -22,8 +22,8 @@ public class CloudUrlControllerTest {
     @LocalServerPort
     private int port;
 
-    @Value("${hostname:127.0.0.1}")
-    private String hostname;
+    @Value("${public-ipv4:127.0.0.1}")
+    private String publicIp;
 
     @Autowired
     private TestRestTemplate restTemplate;
@@ -62,7 +62,7 @@ public class CloudUrlControllerTest {
         longURLDto.setClientId(1);
         ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://127.0.0.1:" + port + "/cloudurl/short-me", longURLDto, String.class);
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(returnValue.getBody()).isEqualTo("http://" + hostname + ":8080/cloudurl/cvuMJB");
+        assertThat(returnValue.getBody()).isEqualTo("http://" + publicIp + ":8080/cloudurl/cvuMJB");
     }
 
 
