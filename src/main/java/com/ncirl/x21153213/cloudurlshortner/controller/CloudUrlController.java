@@ -6,11 +6,15 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.InetAddress;
 import java.net.URI;
+import java.net.UnknownHostException;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +26,9 @@ public class CloudUrlController {
 
     @Value("${cloudurl.api.longUrlMaxSize:2097152}")
     private int maxURLSize;
+
+    @Value("${server.port:8080}")
+    private int port;
 
     @PostMapping(path = "/short-me" )
     @ResponseBody
@@ -36,7 +43,7 @@ public class CloudUrlController {
         }
 
         log.info("Received URL shortening request for {}", longURLDto.getLongUrl());
-        return ResponseEntity.status(HttpStatus.OK).body("http://localhost:8080/cloudurl/" + urlService.toShortUrl(longURLDto));
+        return ResponseEntity.status(HttpStatus.OK).body("http://" + getHostname() + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
     }
 
    // @Cacheable(value = "urls", key = "#shortUrl", sync = true)
@@ -50,5 +57,21 @@ public class CloudUrlController {
         return ResponseEntity.status(HttpStatus.FOUND)
                 .location(URI.create(urlService.getLongUrl(shortUrl)))
                 .build();
+    }
+
+
+    /**
+     * Get hostname.
+     *
+     * @return
+     */
+    private String getHostname() {
+        String hostname = "localhost";
+        try {
+            InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            // return localhost
+        }
+        return hostname;
     }
 }
