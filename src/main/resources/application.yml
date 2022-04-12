@@ -4,6 +4,8 @@ neurl:
   api:
     longUrlMaxSize: 2097152
 
+url:
+  prefix: "127.0.0.1"
 management:
   endpoints:
     web:

@@ -22,7 +22,7 @@ public class CloudUrlControllerTest {
     @LocalServerPort
     private int port;
 
-    @Value("${public-ipv4:127.0.0.1}")
+    @Value("${url.prefix:127.0.0.1}")
     private String publicIp;
 
     @Autowired

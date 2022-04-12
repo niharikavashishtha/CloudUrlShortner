@@ -30,9 +30,9 @@ public class CloudUrlController {
     @Value("${server.port:8080}")
     private int port;
 
-    @Value("${public-ipv4:127.0.0.1}")
+    @Value("${url.prefix:127.0.0.1}")
     private String publicIp;
-
+    
     @PostMapping(path = "/short-me" )
     @ResponseBody
     public ResponseEntity<String> shortMe(@RequestBody LongUrlDTO longURLDto) {
