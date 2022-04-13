@@ -3,6 +3,8 @@ package com.ncirl.x21153213.cloudurlshortner.service;
 import com.ncirl.x21153213.cloudurlshortner.dto.LongUrlDTO;
 import com.ncirl.x21153213.cloudurlshortner.entity.ClientEntity;
 import com.ncirl.x21153213.cloudurlshortner.entity.UrlEntity;
+import com.ncirl.x21153213.cloudurlshortner.exception.ClientIdNotFoundException;
+import com.ncirl.x21153213.cloudurlshortner.exception.InvalidApiKeyException;
 import com.ncirl.x21153213.cloudurlshortner.repository.ClientRepository;
 import com.ncirl.x21153213.cloudurlshortner.repository.UrlRepository;
 import lombok.AllArgsConstructor;
@@ -35,7 +37,7 @@ public class UrlService {
 
     public String toShortUrl(LongUrlDTO longURLDto){
         ClientEntity clientEntity = clientRepository.findById(longURLDto.getClientId()).orElseThrow(() ->
-                 new EntityNotFoundException("Client Id is not found") );
+                 new ClientIdNotFoundException("Client Id is not found") );
 
         if( clientEntity.getApiKey().equals(longURLDto.getApiKey())) {
             UrlEntity urlEntity = UrlEntity.builder().longUrl(longURLDto.getLongUrl())
@@ -43,7 +45,7 @@ public class UrlService {
             urlEntity = urlRepository.save(urlEntity);
             return base62Service.encode(urlEntity.getId());
         } else {
-            throw new IllegalArgumentException("Invalid API Key passed");
+            throw new InvalidApiKeyException("Invalid API Key passed");
         }
     }
 }
