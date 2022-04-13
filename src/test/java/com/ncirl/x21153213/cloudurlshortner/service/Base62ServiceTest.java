@@ -13,16 +13,16 @@ public class Base62ServiceTest {
 
     @Test
     public void test_encode_success() {
-        assertEquals("Z", base62Service.encode(51));
+        assertEquals("z", base62Service.encode(51));
     }
 
     @Test
     public void test_encode_moreThan62_success() {
-        assertEquals("nhA", base62Service.encode(50432));
+        assertEquals("bci", base62Service.encode(50432));
     }
 
     @Test
     public void test_decode_singleCharacter() {
-        assertEquals(24, base62Service.decode("y"));
+        assertEquals(42, base62Service.decode("y"));
     }
 }

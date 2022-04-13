@@ -9,6 +9,8 @@ import com.ncirl.x21153213.cloudurlshortner.repository.ClientRepository;
 import com.ncirl.x21153213.cloudurlshortner.repository.UrlRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityNotFoundException;
 import java.util.Date;
@@ -22,6 +24,7 @@ public class UrlService {
 
     private Base62Service base62Service;
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String getLongUrl(String shortUrl){
        Long id = base62Service.decode(shortUrl);
         UrlEntity urlEntity =
@@ -35,6 +38,7 @@ public class UrlService {
        return urlEntity.getLongUrl();
     }
 
+    @Transactional(propagation = Propagation.REQUIRED)
     public String toShortUrl(LongUrlDTO longURLDto){
         ClientEntity clientEntity = clientRepository.findById(longURLDto.getClientId()).orElseThrow(() ->
                  new ClientIdNotFoundException("Client Id is not found") );

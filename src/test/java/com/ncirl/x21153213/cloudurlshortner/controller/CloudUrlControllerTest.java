@@ -62,7 +62,7 @@ public class CloudUrlControllerTest {
         longURLDto.setClientId(1);
         ResponseEntity<String> returnValue = this.restTemplate.postForEntity("http://127.0.0.1:" + port + "/cloudurl/short-me", longURLDto, String.class);
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
-        assertThat(returnValue.getBody()).isEqualTo("http://" + publicIp + ":8080/cloudurl/cvuMJB");
+        assertThat(returnValue.getBody()).isEqualTo("http://" + publicIp + ":8080/cloudurl/sqFWx0");
     }
 
 
