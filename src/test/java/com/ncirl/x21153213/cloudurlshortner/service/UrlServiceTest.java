@@ -15,6 +15,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -64,7 +65,7 @@ public class UrlServiceTest {
         longUrlDTO.setLongUrl("anything.com");
         longUrlDTO.setApiKey("something");
         longUrlDTO.setClientId(345L);
-        String shortUrl = urlService.toShortUrl(longUrlDTO);
-        assertEquals("xyaabc", shortUrl);
+        LongUrlDTO shortUrl = urlService.toShortUrl(longUrlDTO);
+        assertTrue(shortUrl.getShortUrl().endsWith("/cloudurl/xyaabc"));
     }
 }

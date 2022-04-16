@@ -35,7 +35,7 @@ public class CloudUrlController {
     
     @PostMapping(path = "/short-me" )
     @ResponseBody
-    public ResponseEntity<String> shortMe(@RequestBody LongUrlDTO longURLDto) {
+    public ResponseEntity<LongUrlDTO> shortMe(@RequestBody LongUrlDTO longURLDto) {
         if (!StringUtils.hasText(longURLDto.getLongUrl())) {
             log.error("Invalid Input Passed");
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
@@ -46,7 +46,7 @@ public class CloudUrlController {
         }
 
         log.info("Received URL shortening request for {}", longURLDto.getLongUrl());
-        return ResponseEntity.status(HttpStatus.OK).body("http://" + publicIp + ":" + port + "/cloudurl/" + urlService.toShortUrl(longURLDto));
+        return ResponseEntity.status(HttpStatus.OK).body(urlService.toShortUrl(longURLDto));
     }
 
    // @Cacheable(value = "urls", key = "#shortUrl", sync = true)

@@ -8,6 +8,8 @@ import com.ncirl.x21153213.cloudurlshortner.exception.InvalidApiKeyException;
 import com.ncirl.x21153213.cloudurlshortner.repository.ClientRepository;
 import com.ncirl.x21153213.cloudurlshortner.repository.UrlRepository;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,12 +19,18 @@ import java.util.Date;
 
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UrlService {
-    private UrlRepository urlRepository;
-    private ClientRepository clientRepository;
+    private final UrlRepository urlRepository;
+    private final ClientRepository clientRepository;
 
-    private Base62Service base62Service;
+    private final Base62Service base62Service;
+
+    @Value("${server.port:8080}")
+    private int port;
+
+    @Value("${url.prefix:127.0.0.1}")
+    private String publicIp;
 
     @Transactional(propagation = Propagation.REQUIRED)
     public String getLongUrl(String shortUrl){
@@ -39,7 +47,7 @@ public class UrlService {
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public String toShortUrl(LongUrlDTO longURLDto){
+    public LongUrlDTO toShortUrl(LongUrlDTO longURLDto){
         ClientEntity clientEntity = clientRepository.findById(longURLDto.getClientId()).orElseThrow(() ->
                  new ClientIdNotFoundException("Client Id is not found") );
 
@@ -47,7 +55,8 @@ public class UrlService {
             UrlEntity urlEntity = UrlEntity.builder().longUrl(longURLDto.getLongUrl())
                     .createdDate(new Date()).clientId(longURLDto.getClientId()).build();
             urlEntity = urlRepository.save(urlEntity);
-            return base62Service.encode(urlEntity.getId());
+            longURLDto.setShortUrl("http://" + publicIp + ":" + port + "/cloudurl/"  + base62Service.encode(urlEntity.getId()));
+            return longURLDto;
         } else {
             throw new InvalidApiKeyException("Invalid API Key passed");
         }

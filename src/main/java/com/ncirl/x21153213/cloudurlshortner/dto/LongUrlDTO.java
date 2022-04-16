@@ -16,4 +16,5 @@ public class LongUrlDTO {
     private String longUrl;
     private long clientId;
     private String apiKey;
+    private String shortUrl;
 }
