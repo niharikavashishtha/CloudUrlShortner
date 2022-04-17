@@ -9,7 +9,9 @@ phases:
       - echo Nothing to do in the pre_build phase...
   build:
     commands:
+      - export SONAR_TOKEN=6ec343e563cb7aa55def37958b3b7a29dfe3c1f9
       - echo Build started on `date`
+      - mvn test sonar:sonar
   post_build:
     commands:
       - echo Build completed on `date`
