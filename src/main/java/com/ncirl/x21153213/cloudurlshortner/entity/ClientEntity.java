@@ -1,7 +1,10 @@
 package com.ncirl.x21153213.cloudurlshortner.entity;
 
 import com.sun.istack.NotNull;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.UUID;
@@ -10,6 +13,9 @@ import java.util.UUID;
 @Table(name = "Client")
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ClientEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -21,5 +27,5 @@ public class ClientEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @NotNull
     @Column(name = "apiKey", unique = true, updatable = false)
-    private String apiKey = UUID.randomUUID().toString();
+    private String apiKey;
 }
