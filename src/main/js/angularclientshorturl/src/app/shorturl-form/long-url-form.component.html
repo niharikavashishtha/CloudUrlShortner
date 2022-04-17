@@ -1,0 +1,26 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #longUrlForm="ngForm">
+      <div class="form-group">
+        <label for="longUrl">LongUrl</label>
+        <input type="text" [(ngModel)]="longUrl.longUrl" class="form-control" id="longUrl" name="longUrl" placeholder="Enter your longUrl"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="clientId">clientId</label>
+        <input type="text" [(ngModel)]="longUrl.clientId" class="form-control" id="clientId" name="clientId" placeholder="Enter your clientId"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="apiKey">apiKey</label>
+        <input type="text" [(ngModel)]="longUrl.apiKey" class="form-control" id="apiKey" name="apiKey" placeholder="Enter your apiKey"
+               required #name="ngModel">
+      </div>
+      <button type="submit" [disabled]="!longUrlForm.form.valid" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+  <div *ngIf="submitted">
+    <h6>shortUrl_retrived: <a href="{{ shortUrl }}" target="_blank" rel="noopener noreferrer">{{ shortUrl }}</a>.</h6>
+    <button class="btn btn-success" (click)="newLongUrl()">reset</button>
+  </div>
+</div>

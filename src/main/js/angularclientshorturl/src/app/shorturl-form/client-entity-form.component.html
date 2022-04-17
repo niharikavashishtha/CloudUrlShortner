@@ -1,0 +1,28 @@
+<div class="card my-5">
+  <div class="card-body">
+    <form (ngSubmit)="onSubmit()" #clientEntityForm="ngForm">
+      <div class="form-group">
+        <label for="clientName">clientName</label>
+        <input type="text" [(ngModel)]="clientEntity.clientName" class="form-control" id="clientName" name="clientName" placeholder="Enter your clientName"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="clientEmail">clientEmail</label>
+        <input type="text" [(ngModel)]="clientEntity.clientEmail" class="form-control" id="clientEmail" name="clientEmail" placeholder="Enter your clientEmail"
+               required #name="ngModel">
+      </div>
+      <div class="form-group">
+        <label for="clientAccountNumber">clientAccountNumber</label>
+        <input type="text" [(ngModel)]="clientEntity.clientAccountNumber" class="form-control" id="clientAccountNumber" name="clientAccountNumber" placeholder="Enter your clientAccountNumber"
+               required #name="ngModel">
+      </div>
+      <button type="submit" [disabled]="!clientEntityForm.form.valid" class="btn btn-info">Submit</button>
+    </form>
+  </div>
+  <div *ngIf="submitted">
+    <h4> Client is registered successfully </h4>
+    <h5> apikey: {{ clientEntity.apiKey }} </h5>
+    <h5> clientId : {{ clientEntity.clientId }} </h5>
+    <button class="btn btn-success" (click)="setClientEntityDefault()">reset</button>
+  </div>
+</div>
