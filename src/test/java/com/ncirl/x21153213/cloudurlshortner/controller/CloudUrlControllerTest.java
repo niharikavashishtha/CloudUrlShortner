@@ -64,7 +64,7 @@ public class CloudUrlControllerTest {
         assertThat(returnValue.getStatusCode()).isEqualTo(HttpStatus.OK);
         assertThat(returnValue.getBody()).isInstanceOf(LongUrlDTO.class);
 
-        assertThat(returnValue.getBody().getShortUrl()).isEqualTo("http://" + publicIp + ":8080/cloudurl/sqFWx0");
+        assertThat(returnValue.getBody().getShortUrl()).isEqualTo("http://" + publicIp + ":" + port + "/cloudurl/sqFWx0");
     }
 
 
