@@ -19,6 +19,10 @@
 		<sonar.organization>niharikavashishtha</sonar.organization>
 		<sonar.projectKey>CloudUrlShortner</sonar.projectKey>
 		<SONAR_TOKEN>6ec343e563cb7aa55def37958b3b7a29dfe3c1f9</SONAR_TOKEN>
+		<sonar.exclusions>
+			src/main/java/com/ncirl/x21153213/cloudurlshortner/dto/*,
+			src/main/java/com/ncirl/x21153213/cloudurlshortner/entity/*
+		</sonar.exclusions>
 	</properties>
 
 	<dependencies>
