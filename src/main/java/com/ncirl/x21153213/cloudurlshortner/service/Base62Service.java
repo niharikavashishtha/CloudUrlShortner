@@ -18,7 +18,7 @@ public class Base62Service {
      * @Description: this encode the id it gets in input
      * @param: takes id from  as an input
      * @returns: converted string using the logic below
-     * output generating
+     * output generating from base62
      * */
     public String encode(long input){
         StringBuilder encodedString = new StringBuilder();
