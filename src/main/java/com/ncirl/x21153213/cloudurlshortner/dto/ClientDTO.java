@@ -1,19 +1,19 @@
 package com.ncirl.x21153213.cloudurlshortner.dto;
 
-import com.sun.istack.NotNull;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.UUID;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
 @Setter
+/*
+@author : x21153213niharika
+* This is a DTo class for Client
+@used: used in register client information and save
+@calling classes : ClientController, ClientService and test classes
+* */
 public class ClientDTO {
     private long clientId;
     private String clientName;

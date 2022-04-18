@@ -1,0 +1,103 @@
+{
+	"name": "cloudurl-AWS",
+	"description": "",
+	"order": [
+		"6603faba-7373-ddb6-1f5d-828ff78aa845",
+		"c3aad168-c33e-aedc-ba92-8618e2cfad92",
+		"748c2ec1-9f73-11ed-7057-7e8a35514dee"
+	],
+	"folders_order": [],
+	"owner": "20511780",
+	"id": "ceceda08-fc0a-b422-0eb7-3e3af8d01627",
+	"lastUpdatedBy": "20511780",
+	"folders": [],
+	"transactionId": "3477020d-102a-4e82-b2f4-8c24e866de9e",
+	"hasRequests": true,
+	"requests": [
+		{
+			"id": "6603faba-7373-ddb6-1f5d-828ff78aa845",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/cloudurl/cvuMJB",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"name": "http://localhost:8080/neurl/cvuMJB",
+			"rawModeData": "{\n  \"longUrl\": \"amazon.co.uk\"\n}",
+			"folder": null,
+			"auth": null,
+			"responses": [],
+			"collectionId": "ceceda08-fc0a-b422-0eb7-3e3af8d01627"
+		},
+		{
+			"id": "748c2ec1-9f73-11ed-7057-7e8a35514dee",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/cloudurl/registerclient",
+			"folder": null,
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1649882238763,
+			"name": "http://localhost:8080/neurl/cvuMJB copy copy",
+			"collectionId": "ceceda08-fc0a-b422-0eb7-3e3af8d01627",
+			"responses": [],
+			"rawModeData": "{\n  \"clientName\" : \"Manojagain\",\n   \"clientEmail\" : \"niharika@gmail.com\",\n   \"clientAccountNumber\" : \"43746398\"\n}"
+		},
+		{
+			"id": "c3aad168-c33e-aedc-ba92-8618e2cfad92",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:8080/cloudurl/short-me",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": null,
+			"helperAttributes": null,
+			"name": "http://localhost:8080/neurl/cvuMJB copy",
+			"rawModeData": "{\n  \"longUrl\": \"https://amazon.co.uk\",\n  \"clientId\":12,\n    \"apiKey\": \"49fee944-e68a-46fb-b0e5-490628abd7d9\"\n\n}",
+			"folder": null,
+			"auth": null,
+			"responses": [],
+			"collectionId": "ceceda08-fc0a-b422-0eb7-3e3af8d01627"
+		}
+	]
+}

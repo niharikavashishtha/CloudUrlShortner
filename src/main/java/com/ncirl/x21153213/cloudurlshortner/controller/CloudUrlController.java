@@ -5,21 +5,22 @@ import com.ncirl.x21153213.cloudurlshortner.service.UrlService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
-import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
-
-import java.net.InetAddress;
 import java.net.URI;
-import java.net.UnknownHostException;
 
 @RestController
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping(path = "/cloudurl")
+/*
+@author : x21153213niharika
+* This is a controller class for URL
+@method : use post mapping to save the longURL post by the client
+and get mapping to give response as a short url
+* */
 public class CloudUrlController {
 
     private final UrlService urlService;
@@ -35,6 +36,11 @@ public class CloudUrlController {
     
     @PostMapping(path = "/short-me" )
     @ResponseBody
+    /*
+     * @Description: short me method takes the long url from client
+     * @param: takes LongDTO as an input
+     * @returns: updated LongUrlDTO
+     * */
     public ResponseEntity<LongUrlDTO> shortMe(@RequestBody LongUrlDTO longURLDto) {
         if (!StringUtils.hasText(longURLDto.getLongUrl())) {
             log.error("Invalid Input Passed");
@@ -49,7 +55,9 @@ public class CloudUrlController {
         return ResponseEntity.status(HttpStatus.OK).body(urlService.toShortUrl(longURLDto));
     }
 
-   // @Cacheable(value = "urls", key = "#shortUrl", sync = true)
+    /*
+     * @Description: getMe gives shorturl as an output for the longurl passed by client
+     * */
     @GetMapping(path = "/{shortUrl}")
     public ResponseEntity<Void> getMe(@PathVariable ("shortUrl") String shortUrl) {
         if (!StringUtils.hasText(shortUrl)) {

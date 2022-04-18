@@ -1,6 +1,5 @@
 package com.ncirl.x21153213.cloudurlshortner.dto;
 
-import com.ncirl.x21153213.cloudurlshortner.entity.ClientEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.AllArgsConstructor;
@@ -12,6 +11,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Getter
 @Setter
+/*
+@author : x21153213niharika
+* This is a DTo class for URL
+@used: used for saving long URL
+@calling classes : CloudUrlController,  UrlService and test classes
+* */
 public class LongUrlDTO {
     private String longUrl;
     private long clientId;

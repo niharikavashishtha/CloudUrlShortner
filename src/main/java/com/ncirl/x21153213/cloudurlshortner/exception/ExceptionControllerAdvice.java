@@ -9,6 +9,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
 @Slf4j
+/*
+@author : x21153213niharika
+* This is an Exception class for controlling the exception in the application
+@used: exceptionhandlers are defined here to control if happened
+@calling classes : UrlServiec, ClientService and test classes
+* */
 public class ExceptionControllerAdvice {
 
     private final String SHORT_URL_NOT_FOUND_ERROR = "Short URL Code does not existed, might have been cleaned up";

@@ -4,9 +4,7 @@ CloudURLShortner is a scalable URL Shortening service. It provides easy to use R
 
 It can support upto 62^6 = 58 Billion different URLs.
 
-It can be scaled up to multiple instances running on docker container
-The Docker compose also spins up the nginx proxy to load balance the instances
-using round robin scheduling.
+
 
 ![Flow](Images/CloudURLShortner.png)
 
@@ -27,14 +25,6 @@ after build open this file in the browser
 ```
 
 
-## How to Run using docker and scale up with 3 API instances
-
-```
-$ git clone https://github.com/niharikavashishtha/CloudURLShortner-api.git
-$ cd CloudURLShortner-api
-$ docker-compose up --build --scale CloudURLShortner-api=3
-
-```
 
 ## With In memory DB H2
 ```
@@ -46,27 +36,35 @@ $ java -jar -Dspring.profiles.active=h2 CloudURLShortner-api-0.0.1-SNAPSHOT.jar
 ```
 
 ## How to test
-I have added [PostMan collection](./POSTMAN.json) to test the APIs
+I have added [PostMan collection](./cloudurl-AWS.postman_collection.json) to test the APIs
+
+## using Sonar
+mvn sonar:sonar
+
 
 ## Things I learned and used in this project
 
-#### Docker and docker compose
-Tools to spin up multiple containers and scaling them.
 #### Spring web REST
 SpringBoot tools for building RESTful services.
 #### Lombok
 Convenient tool for code auto-generation.
 #### Spring JPA, mysql, h2
 SpringBoot tool for JPA for accessing databse.
-#### Nginx proxy for load balancing
-Proxy server for load balancing http requests.
 
-## Things to be done
+
 
 ### User API key for authorization 
 to shorten the URL the POST API call takes JSON in the body request. It can be subject to malicious 
 attack i.e. user can flood our system with junk URLs. so we can add API key ID field in the 
 LongUrlDTO to only allow register user to allow adding the URL.
+
+###
+use of different AWS cloud service
+building CICD pipelines
+using EC2 instances
+
+
+## Things to be done
 
 ### Performance testing
 I have'nt done the performance testing yet, but I would like to know, how the
