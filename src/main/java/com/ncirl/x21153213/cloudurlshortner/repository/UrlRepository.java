@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UrlRepository extends JpaRepository<UrlEntity,Long> {
+    public void deleteAllByClientId(Long clientId);
 }

@@ -36,4 +36,26 @@ public class ClientController {
         clientDTO = clientService.registerClient(clientDTO);
         return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
+
+    @DeleteMapping(path = "/clients/{clientId}")
+    public void deleteClient(@PathVariable("clientId") Long clientId) {
+        clientService.deleteClient(clientId);
+    }
+
+    @GetMapping(path = "/clients/{clientId}")
+    public ResponseEntity<ClientDTO> getClient(@PathVariable("clientId") Long clientId) {
+        ClientDTO clientdto = clientService.getClient(clientId);
+        return ResponseEntity.status(HttpStatus.OK).body(clientdto);
+    }
+
+    @PutMapping(path = "/clients")
+    @ResponseBody
+    public ResponseEntity<ClientDTO> updateClient(@RequestBody ClientDTO clientDTO) {
+        if (!StringUtils.hasText(clientDTO.getClientName())) {
+            log.error("Invalid Input Passed");
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+        ClientDTO clientdto = clientService.updateClient(clientDTO);
+        return ResponseEntity.status(HttpStatus.OK).body(clientdto);
+    }
 }

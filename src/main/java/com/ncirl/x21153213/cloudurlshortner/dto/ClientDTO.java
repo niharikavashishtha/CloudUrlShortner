@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Getter
 @Setter
+@Builder
 /*
 @author : x21153213niharika
 * This is a DTo class for Client
