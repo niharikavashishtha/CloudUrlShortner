@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 /*
 @author : x21153213niharika
 * This is a controller class for client
-@method : used post mapping to register a client
+@method : used post mapping to register a client and
 * */
 public class ClientController {
     private final ClientService clientService;
@@ -36,18 +36,34 @@ public class ClientController {
         clientDTO = clientService.registerClient(clientDTO);
         return ResponseEntity.status(HttpStatus.OK).body(clientDTO);
     }
-
+    /*
+     * @Description: deleteClient method delete the registered client with the applocation
+     * @param: takes clientID as an input
+     * @returns: void
+     * call method deleteClient of clientService class
+     * do: deleted client entity and url associated with the client
+     * */
     @DeleteMapping(path = "/clients/{clientId}")
     public void deleteClient(@PathVariable("clientId") Long clientId) {
         clientService.deleteClient(clientId);
     }
-
+    /*
+     * @Description: get method for the registered client
+     * @param: takes clientID as an input
+     * @returns: ClientDto
+     * call method getClient of clientService class
+     * */
     @GetMapping(path = "/clients/{clientId}")
     public ResponseEntity<ClientDTO> getClient(@PathVariable("clientId") Long clientId) {
         ClientDTO clientdto = clientService.getClient(clientId);
         return ResponseEntity.status(HttpStatus.OK).body(clientdto);
     }
-
+    /*
+     * @Description: update method for the registered client to update the already registered clients
+     * @param: takes ClientDTO object as an input
+     * @returns: ClientDto
+     * call method updateClient of clientservice class
+     * */
     @PutMapping(path = "/clients")
     @ResponseBody
     public ResponseEntity<ClientDTO> updateClient(@RequestBody ClientDTO clientDTO) {
