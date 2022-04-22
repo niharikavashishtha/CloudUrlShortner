@@ -61,7 +61,7 @@ public class ClientController {
     /*
      * @Description: update method for the registered client to update the already registered clients
      * @param: takes ClientDTO object as an input
-     * @returns: ClientDto
+     * @returns: return ClientDto for reference
      * call method updateClient of clientservice class
      * */
     @PutMapping(path = "/clients")
